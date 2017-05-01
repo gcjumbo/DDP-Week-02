@@ -11,10 +11,10 @@ As a fourth-year student at Grinnell College thinking about what information wou
 
 ## Setup
 
-```{r, eval = FALSE}
-library(dplyr)
+```{r, echo = FALSE, warning = FALSE}
 library(leaflet)
-setwd("~/Documents/Grinnell College/04_Spring 2017/MAT-397 (Adv Data Sci)/Coursera/08_Developing Data Products")
+library(dplyr)
+setwd("~/Documents/Grinnell College/04_Spring 2017/MAT-397 (Adv Data Sci)/Coursera/08_Developing Data Products/DDP-Week-02/")
 acad <- read.csv("acadBuildings.csv")
 ```
 
@@ -53,7 +53,7 @@ grinSites <- c(
 
 ```{r}
 # Subsetting points of interest (in this case, academic buildings at Grinnell College)
-locations <- select(acad, lat, long)
+locations <- select(acad, lat, lng)
 
 my_map <- locations %>%
     leaflet() %>%
