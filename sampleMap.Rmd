@@ -1,9 +1,13 @@
 ---
-title: "Sample Map"
+title: "Simple Map of Grinnell College Academic Buildings"
 author: "Jarren Santos"
 date: "4/30/2017"
 output: html_document
 ---
+
+# Project Information
+As a fourth-year student at Grinnell College thinking about what information would have been useful to me as an incoming or prospective student, I thought it would be neat and simple to create a map of Grinnell College's academic buildings and hyperlink them to their respective websites.  This is a map created using the `leaflet` package in R.
+
 
 ## Setup
 
