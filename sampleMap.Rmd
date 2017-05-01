@@ -1,0 +1,60 @@
+---
+title: "Sample Map"
+author: "Jarren Santos"
+date: "4/30/2017"
+output: html_document
+---
+
+## Setup
+
+```{r, eval = FALSE}
+library(dplyr)
+library(leaflet)
+setwd("~/Documents/Grinnell College/04_Spring 2017/MAT-397 (Adv Data Sci)/Coursera/08_Developing Data Products")
+acad <- read.csv("acadBuildings.csv")
+```
+
+
+## Making Custom Markers
+
+```{r}
+# Creating a marker based on the openly sourced logo for Grinnell College
+grinIcon <- makeIcon(
+    iconUrl = "https://upload.wikimedia.org/wikipedia/en/thumb/b/bc/Grinnell_College_seal.svg/1200px-Grinnell_College_seal.svg.png",
+    iconWidth = 31*215/230, iconHeight = 31,
+    iconAnchorX = 31*215/230/2, iconAnchorY = 16
+)
+
+# Creating a list of websites that redirect to Grinnell College
+grinSites <- c(
+    "<a href ='https://www.grinnell.edu/'>Grinnell College</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/alumni-recitation-hall-arh'>Alumni Recitation Hall (ARH)</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/joe-rosenfield-%E2%80%9925-center'>Joe Rosenfield '25 Center (JRC)</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/bucksbaum-center-arts'>Bucksbaum Center for the Arts</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/charles-benson-bear-39-recreation-and-athletic-center'>Charles Benson Bear '39 Recreation & Athletic Center</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/burling-library'>Burling Library</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/mears-cottage'>Mears Cottage</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/steiner-hall'>Steiner Hall</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/goodnow-hall'>Goodnow Hall</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/carnegie-hall'>Carnegie Hall</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/forum'>Forum</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/robert-n-noyce-%E2%80%9949-science-center'>Robert N. Noyce '49 Science Center</a>",
+    "<a href ='https://www.grinnell.edu/about/visit/spaces/harris-center'>Harris Center</a>"
+)
+```
+
+
+
+## Grinnell College Academic Building Map
+
+```{r}
+# Subsetting points of interest (in this case, academic buildings at Grinnell College)
+locations <- select(acad, lat, long)
+
+my_map <- locations %>%
+    leaflet() %>%
+    addTiles() %>% # Allows for basic map
+    addMarkers(icon = grinIcon, popup = grinSites, clusterOptions = markerClusterOptions()) # Adds markers onto map
+my_map
+```
+
